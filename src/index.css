@@ -10,11 +10,27 @@
    #root {
     @apply m-0 p-0 w-screen
    }
+
+   input {
+    @apply text-center
+   }
 }
 
 @layer components {
+    .navbar {
+        @apply bg-[#10172A] border border-[#334154] h-[3rem] w-[80vw] absolute left-28 mt-4 rounded-full px-6 flex justify-between items-center text-white
+    }
+
     .input-main {
         @apply outline outline-blue-700 rounded-md
+    }
+
+    .input {
+        @apply border border-[#334154]
+    }
+
+    .center-text {
+        @apply text-center
     }
 
     .avatar {
@@ -25,12 +41,16 @@
         @apply h-8 w-8 rounded-full
     }
 
+    .btn-hover {
+        @apply hover:bg-red-500
+    }
+
     .role {
-        @apply p-1 rounded-full text-sm font-semibold
+        @apply p-1 rounded-full text-sm font-semibold bg-opacity-50
     }
 
     .role-plain {
-        @apply bg-[#2F2760] text-[#8957FF]
+        @apply bg-[#2F2760] text-[#8957FF] bg-opacity-50 hover:bg-opacity-100
     }
 
     .role-def {
@@ -39,5 +59,9 @@
 
     .role-success {
         @apply text-[#00CC87] bg-[#175249]
+    }
+
+    .card {
+        @apply hover:shadow-2xl hover:shadow-[#403d39] 
     }
 }

@@ -1,26 +1,35 @@
 import React, { useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import Avatar from '../assets/avatar.jpg'
+import { removeUserToken } from '../Auth/authLocalStorage'
 
 
-const Navbar = ({ activeUser, activeUserProfile }) => {
+const Navbar = ({ activeUser, activeUserProfile, setActiveUser, setActiveUserProfile }) => {
   
+  const handleLogout = () => {
+    const logout = removeUserToken()
+    if (logout) {
+      setActiveUser("")
+      setActiveUserProfile("")
+      console.log('logged out user')
+    }
+  }
   
   return (
     <div>
       {
         activeUser ? (
-          <div className='bg-[#160e10] h-[3rem] w-[80vw] absolute left-28 top-8 rounded-full px-6 flex justify-between items-center text-white'>
+          <div className='navbar'>
             <h4>{activeUserProfile.username}</h4>
             <div className='flex gap-5'>
               <Link>Explore</Link>
               <Link to="/form">Create Case</Link>
-              <Link to="/login">Logout</Link>
+              <Link to="/login" onClick={handleLogout}>Logout</Link>
               <img src={Avatar} className='avatar-nav' />
             </div>
           </div>
         ) : (
-          <div className='bg-[#160e10] h-[3rem] w-[80vw] absolute left-28 top-8 rounded-full px-6 flex justify-between items-center text-white'>
+          <div className='navbar'>
             <h4>ECourt</h4>
             <div className='flex gap-5'>
               <Link>Explore</Link>

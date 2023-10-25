@@ -42,6 +42,26 @@ export const validateUser = async (token) => {
     }
 }
 
+export const getAllUsers = async () => {
+    try {
+        const response = await axios.get(`${baseURL}/users/all`)
+        console.log(response)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const getUserInfo = async (userId) => {
+    try {
+        const response = await axios.get(`${baseURL}/users/user/${userId}`)
+        // console.log(response.data.data.username)
+        return response.data.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
 export const getCases = async () => {
     try {
         const response = await axios.get(`${baseURL}/case/all`)
@@ -55,9 +75,19 @@ export const getCases = async () => {
 export const createCase = async (caseInfo) => {
     try {
         const response = await axios.post(`${baseURL}/case/create`, caseInfo)
-        console.log(response.data.data)
-        return response.data.data
+        console.log(response)
+        return response.data
     } catch (error) {
-        return error.response.message
+        return error.response.data.message
+    }
+}
+
+export const updateCase = async (caseInfo, caseID) => {
+    try {
+        const response = await axios.put(`${baseURL}/case/update/${caseID}`, caseInfo)
+
+        console.log(response.data.data)
+    } catch (error) {
+        return error.response.data
     }
 }
