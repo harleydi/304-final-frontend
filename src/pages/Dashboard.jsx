@@ -1,24 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import avatar from '../assets/avatar.jpg'
 import DashCaseCard from '../components/DashCaseCard'
 import { useOutletContext } from 'react-router-dom'
 import { updateCase } from '../utils/apiHelper'
+import Evidence from '../components/Evidence'
 
-const CasePage = () => {
+const CasePage = ({ id }) => {
+  const { selectedCase, activeUserProfile, activeUser, cases } = useOutletContext()
+
   const [statement, setStatement] = useState('opening')
   const [team, setTeam] = useState('A')
   const [userStatus, setUserStatus] = useState()
   const [addEvidenceForm, setAddEvidenceForm] = useState([])
   const [evidenceInput, setEvidenceInput] = useState()
+  const [xEvidence, setXEvidence] = useState(selectedCase.plaintiffEvidence)
+  const [yEvidence, setYEvidence] = useState(selectedCase.defendantEvidence)
 
-  const { selectedCase, activeUserProfile, activeUser } = useOutletContext()
 
-  // console.log(selectedCase.plaintiffStatements[statement])
+  // const plaintiffEvidence = selectedCase.plaintiffEvidence.map((item) => { 
+  //   <li className='border border-[#334154] rounded-md py-8 px-20'>{item.name}</li> 
+  // })
+  // const defendantEvidence = selectedCase.defendantEvidence.map((item) => { 
+  //   <li className='border border-[#334154] rounded-md py-8 px-20'>{item.name}</li> 
+  // })
+  // console.log(id)
+  // useEffect(() => {
+  //   const caseResult = cases.map((result) => result._id === id)
+  //   console.log(caseResult)
+  //   // setXEvidence(plaintiffEvidence)
+  //   // setYEvidence(defendantEvidence) 
 
-  const plaintiffEvidence = selectedCase.plaintiffEvidence.map((item) => <li className='border border-[#334154] rounded-md py-8 px-20'>{item.name}</li>)
-  const defendantEvidence = selectedCase.defendantEvidence.map((item) => <li className='border border-[#334154] rounded-md py-8 px-20'>{item.name}</li>)
+  // }, [])
   // console.log(selectedCase.plaintiffEvidence)
 
+  console.log(xEvidence)
+
+  const xplaintiff = {
+    opening: {
+      statement: selectedCase.plaintiffStatements.opening,
+      evidence: selectedCase.plaintiffEvidence.map((item) => item.phase === 'opening')
+    },
+    argument: {
+      statement: selectedCase.plaintiffStatements.argument,
+      evidence: selectedCase.plaintiffEvidence.map((item) => item.phase === 'argument')
+    },
+    closing: {
+      statement: selectedCase.plaintiffStatements.closing,
+      evidence: selectedCase.plaintiffEvidence.map((item) => item.phase === 'closing')
+    },
+  }
+  
   
 
 
@@ -66,9 +97,9 @@ const CasePage = () => {
 
   return (
     <div className='pt-[8rem] h-screen text-[#CBD5E1] flex justify-between'>
-        <div className='border-r w-full h-full flex flex-col gap-6 justify-evenly items-center'>
+        <div className='border-r w-full h-full flex flex-col items-center justify-center gap-4'>
           {participant === 'defendant' ? (
-              <div className='flex justify-between'>
+              <div className=''>
                 <div id='plaintiff' onClick={() => setTeam('A')} className='card'>
                   <DashCaseCard variant={participant} />
                 </div>
@@ -106,11 +137,11 @@ const CasePage = () => {
             {
               team === 'A' ? (
                 <p>
-                  {selectedCase.plaintiffStatements[statement]}
+                  {selectedCase && selectedCase.plaintiffStatements[statement]}
                 </p>
               ) : (
                 <p>
-                  {selectedCase.defendantStatements[statement]}
+                  {selectedCase && selectedCase.defendantStatements[statement]}
                 </p>
               )
             }
@@ -119,19 +150,19 @@ const CasePage = () => {
             {
               team === 'A' ? (
                 <div>
-                  {participant === 'other' ? (
-                    <button>Evidence</button>
-                  ) : (
-                    <button onClick={addEvidence}>Add Evidence</button>
-                  ) }
-                  {addEvidenceForm}
                   <ul className='flex flex-col items-center gap-4'>
-                    {plaintiffEvidence}
+                    {xEvidence.map((item) => <Evidence key={item._id} info={item} />)}
+                    {/* {() => {for (const key in xplaintiff) {
+                        if (key === statement) {
+                          <Evidence info={xplaintiff[key]} />
+                        }
+                      }
+                    }} */}
                   </ul>
                 </div>
               ) : (
                 <ul className='flex flex-col items-center gap-4'>
-                    {defendantEvidence}
+                    {yEvidence}
                   </ul>
               )
             }
