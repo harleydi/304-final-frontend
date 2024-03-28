@@ -97,7 +97,7 @@ const CasePage = ({ id }) => {
 
   return (
     <div className='pt-[8rem] h-screen text-[#CBD5E1] flex justify-between'>
-        <div className='border-r w-full h-full flex flex-col items-center justify-center gap-4'>
+        <div className='border-r w-full h-full flex flex-col items-center justify-center'>
           {participant === 'defendant' ? (
               <div className=''>
                 <div id='plaintiff' onClick={() => setTeam('A')} className='card'>
@@ -119,6 +119,8 @@ const CasePage = ({ id }) => {
             )
           }
         </div>
+
+        {/* ARGUMENTS */}
         <div className='border-r w-[160rem] px-6 flex flex-col justify-center items-center text-center'>
             <div className='absolute top-[10rem] flex gap-8'>
               <button onClick={(e) => {
@@ -146,18 +148,14 @@ const CasePage = ({ id }) => {
               )
             }
         </div>
-        <div id='evidence' className='w-full flex flex-col justify-center items-center'>
+
+        {/* EVIDENCE */}
+        <div id='evidence' className='h-auto w-full pt-[10rem] flex flex-col justify-center items-center overflow-scroll'>
             {
               team === 'A' ? (
                 <div>
                   <ul className='flex flex-col items-center gap-4'>
                     {xEvidence.map((item) => <Evidence key={item._id} info={item} />)}
-                    {/* {() => {for (const key in xplaintiff) {
-                        if (key === statement) {
-                          <Evidence info={xplaintiff[key]} />
-                        }
-                      }
-                    }} */}
                   </ul>
                 </div>
               ) : (

@@ -5,7 +5,7 @@ const Evidence = ({info}) => {
   return (
     <div>
         <h2>{info.description}</h2>
-        <img src={info.source} />
+        <img src={info.source} className='h-[10rem]' />
     </div>
   )
 }
