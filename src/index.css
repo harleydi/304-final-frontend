@@ -50,7 +50,7 @@
     }
 
     .role-plain {
-        @apply bg-[#2F2760] text-[#8957FF] bg-opacity-50 hover:bg-opacity-100
+        @apply bg-[#2F2760] text-[#8957FF] /*bg-opacity-50 hover:bg-opacity-1008*/
     }
 
     .role-def {
@@ -63,5 +63,13 @@
 
     .card {
         @apply hover:shadow-2xl hover:shadow-[#403d39] 
+    }
+
+    .dash-profile-boxes {
+        @qpply flex flex-col gap-2.5
+    }
+
+    .active-argument {
+        @apply bg-slate-200
     }
 }

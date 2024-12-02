@@ -8,7 +8,7 @@ const Home = () => {
   const { cases } = useOutletContext()
 
   console.log(cases)
-
+ 
   return (
     <div className='h-screen pt-32 px-16 flex flex-wrap gap-8 overflow-scroll justify-center'>
       {

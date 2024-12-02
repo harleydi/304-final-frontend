@@ -4,9 +4,10 @@ import DashCaseCard from '../components/DashCaseCard'
 import { useOutletContext } from 'react-router-dom'
 import { updateCase } from '../utils/apiHelper'
 import Evidence from '../components/Evidence'
+import { Tabs } from '@rewind-ui/core'
 
 const CasePage = ({ id }) => {
-  const { selectedCase, activeUserProfile, activeUser, cases } = useOutletContext()
+  const { selectedCase, activeUserProfile, activeUser, cases, activeArgument, setActiveArgument } = useOutletContext()
 
   const [statement, setStatement] = useState('opening')
   const [team, setTeam] = useState('A')
@@ -32,6 +33,12 @@ const CasePage = ({ id }) => {
 
   // }, [])
   // console.log(selectedCase.plaintiffEvidence)
+
+  useEffect(() => {
+    if (activeArgument === 'o') {
+
+    }
+  })
 
   console.log(xEvidence)
 
@@ -93,13 +100,14 @@ const CasePage = ({ id }) => {
     
   }
   
+
   
 
   return (
     <div className='pt-[8rem] h-screen text-[#CBD5E1] flex justify-between'>
-        <div className='border-r w-full h-full flex flex-col items-center justify-center'>
+        <div className='flex'>
           {participant === 'defendant' ? (
-              <div className=''>
+              <div className='flex'>
                 <div id='plaintiff' onClick={() => setTeam('A')} className='card'>
                   <DashCaseCard variant={participant} />
                 </div>
@@ -108,7 +116,7 @@ const CasePage = ({ id }) => {
                 </div>
               </div>
             ) : (
-              <div>
+              <div className='flex flex-col gap-2.5 justify-center'>
                 <div id='plaintiff' onClick={() => setTeam('A')} className='card'>
                   <DashCaseCard variant={'plaintiff'} />
                 </div>
@@ -121,11 +129,11 @@ const CasePage = ({ id }) => {
         </div>
 
         {/* ARGUMENTS */}
-        <div className='border-r w-[160rem] px-6 flex flex-col justify-center items-center text-center'>
-            <div className='absolute top-[10rem] flex gap-8'>
+        <div className='border-x-2 w-[140rem] px-6 flex flex-col justify-center items-center text-center'>
+            {/* <div className='absolute top-[10rem] flex gap-8'>
               <button onClick={(e) => {
                 setStatement('opening')
-                e.target.style.color = 'red'
+               
               }}>Opening</button>
               <button onClick={(e) => {
                 setStatement('argument')
@@ -146,7 +154,29 @@ const CasePage = ({ id }) => {
                   {selectedCase && selectedCase.defendantStatements[statement]}
                 </p>
               )
-            }
+            } */}
+            <Tabs color='blue' className='flex flex-col items-center'>
+              <Tabs.List className='mb-60'>
+                <Tabs.Tab className='text-white' anchor='t1' onClick={(e) => setStatement('opening')}>Opening</Tabs.Tab>
+                <Tabs.Tab className='text-white' anchor='t2' onClick={(e) => setStatement('argument')}>Argument</Tabs.Tab>
+                <Tabs.Tab className='text-white' anchor='t3' onClick={(e) => setStatement('closing')}>Closing</Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Content className='mb-56'>
+                {
+                  team === 'A' ? (
+                    <Tabs.Content>
+                      {selectedCase && selectedCase.plaintiffStatements[statement]}
+                    </Tabs.Content>
+                  ) : (
+                    <Tabs.Content>
+                      {selectedCase && selectedCase.defendantStatements[statement]}
+                    </Tabs.Content>
+                  )
+                }
+              </Tabs.Content>
+              <Tabs.Content></Tabs.Content>
+              <Tabs.Content></Tabs.Content>
+            </Tabs>
         </div>
 
         {/* EVIDENCE */}

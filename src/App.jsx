@@ -13,6 +13,7 @@ function App() {
   const [selectedCase, setSelectedCase] = useState()  //5
   const [cases, setCases] = useState() // 6
   const [users, setUsers] = useState() //7
+  const [activeArgument, setActiveArgument] = useState('o')
   
   useEffect(() => {
     const token = getUserToken()
@@ -56,7 +57,7 @@ function App() {
   return (
     <div className='bg-[#10172A] h-screen w-screen m-0 p-0' >
       <Navbar activeUser={activeUser} activeUserProfile={activeUserProfile} />
-      <Outlet context={{ cases, users, selectedCase, setSelectedCase, setActiveUser, setActiveUserProfile, setUserToken, setRefreshToken, activeUserProfile, activeUser }} />
+      <Outlet context={{ cases, users, selectedCase, setSelectedCase, setActiveUser, setActiveUserProfile, setUserToken, setRefreshToken, activeUserProfile, activeUser, activeArgument, setActiveArgument }} />
     </div>
   )
 }

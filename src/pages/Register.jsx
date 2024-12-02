@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { register } from '../utils/apiHelper'
+import { Button, Input, Text } from '@rewind-ui/core'
 
 const Register = () => {
 
@@ -33,32 +34,33 @@ const Register = () => {
 
   return (
     <div className='pt-32 h-screen text-[#CBD5E1] flex items-center justify-center text-center'>
+      {/* DONT FORGRT TO PUT BACK THE FUNCTIONS TO SET DATAE FOR THE FOR SUBMISSION */}
         <form onSubmit={handleOnSubmit} className='flex flex-col gap-4 '>
-            <div>
-                <label>First Name: </label>
-                <input onChange={(e) => setFirstName(e.target.value)} className='bg-transparent outline outline-1 rounded-md' />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>First Name: </Text>
+              <Input size='sm' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setFirstName(e.target.value)} />
             </div>
-            <div>
-                <label>Last Name: </label>
-                <input onChange={(e) => setLastName(e.target.value)} className='bg-transparent outline outline-1 rounded-md' />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>Last Name: </Text>
+              <Input size='sm' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setLastName(e.target.value)} />
             </div>
-            <div>
-                <label>Username: </label>
-                <input onChange={(e) => setUsername(e.target.value)} className='bg-transparent outline outline-1 rounded-md' />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>Username: </Text>
+              <Input size='sm' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setUsername(e.target.value)} />
             </div>
-            <div>
-                <label>Email: </label>
-                <input onChange={(e) => setEmail(e.target.value)} className='bg-transparent outline outline-1 rounded-md' />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>Email: </Text>
+              <Input size='sm' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div>
-                <label>Password: </label>
-                <input onChange={(e) => setPassword(e.target.value)} className='bg-transparent outline outline-1 rounded-md' />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>Password: </Text>
+              <Input size='sm' type='password' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <div>
-              <label htmlFor="">Profile image:</label>
-              <input type='file' onChange={(e) => setUserImg(e.target.value)} />
+            <div className='flex gap-4 items-center'>
+              <Text variant='h6' color='white'>Profile picture: </Text>
+              <Input size='sm' type='file' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setUserImg(e.target.value)} />
             </div>
-            <button>Submit</button>
+            <Button>Submit</Button>
         </form>
     </div>
   )

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { login } from '../utils/apiHelper'
 import { setUserToken } from '../Auth/authLocalStorage'
+import { Button, Input, Text } from '@rewind-ui/core'
 
 
 
@@ -41,15 +42,15 @@ const Login = () => {
   return (
     <div className='h-screen pt-32 text-[#CBD5E1] flex justify-center items-center  text-center'>
         <form onSubmit={handleOnSubmit} className='flex justify-center items-center gap-6' >
-            <div>
-                <label>Email: </label>
-                <input className='bg-transparent outline outline-1 rounded-md' onChange={(e) => setEmail(e.target.value)} />
+            <div className='flex gap-4 items-center'>
+                <Text variant='h6' color='white'>Email: </Text>
+                <Input size='sm' type='email' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div>
-                <label>Password: </label>
-                <input className='bg-transparent outline outline-1 rounded-md' onChange={(e) => setPassword(e.target.value)} />
+            <div className='flex gap-4 items-center'>
+                <Text variant='h6' color='white'>Password: </Text>
+                <Input size='sm' type='password' className='bg-[#374151] focus:bg-[#374151] rounded-md w-[20rem] text-white font-bold' onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button>Submit</button>
+            <Button onClick={(e) => handleOnSubmit(e)}>Submit</Button>
         </form>
     </div>
   )
